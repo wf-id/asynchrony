@@ -1,5 +1,5 @@
 module asynchrony
 
-greet() = print("Hello World!")
+include("SIRSinewave.jl")
 
 end # module asynchrony
