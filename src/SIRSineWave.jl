@@ -40,7 +40,7 @@ params0 = [.5, .3, .1, .1, 0.01, 0.005,  0.87, generate_tau(0, cycle_length), cy
 params1 = [.5, .3, .1, .1, 0.01, 0.005,  0.87, generate_tau(1, cycle_length), cycle_length]
 inits = [900000, 900000, 100, 100, 0, 0]
 tspan = (0.0,200.0)
-sir_prob0 = ODEProblem(SIRSineWave,inits,tspan,params)
+sir_prob0 = ODEProblem(SIRSineWave,inits,tspan,params0)
 sir_sol0 = solve(sir_prob,saveat = 0.1)
 
 sir_prob1 = ODEProblem(SIRSineWave,inits,tspan,params1)
