@@ -1,3 +1,5 @@
+
+
 function TwoPatch_Global_SIR_Sine(beta_max, beta_min, gamma_max, gamma_min, m, asynchrony, mu, cycle_length, phi;
 periods = 50, Ntotal = 10^7, initial_infected = 10)
 

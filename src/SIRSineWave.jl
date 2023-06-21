@@ -1,3 +1,29 @@
+
+"""
+   SIRSineWave(du, u, p, t)
+
+Build the differential equation to be solved.
+
+**Arguments**
+
+- `du` -- user does not need to modify
+- `u` -- a numeric vector representing the initial states for the six comparements
+    in the form of `[S1, S2, I1, I2, R1, R2 ]`
+- `p`  -- a numeric vector representing the parameters for the model taking the form
+    [beta_bar, gamma_bar, beta_amp, gamma_amp, mu, m, phi, tau, T]
+
+**ODE Details**
+
+``\\frac{dS1}{dt} = -S1 * β_a \\dot I1 / N + m \\dot S2 - m \\dot S1``
+
+**Returns**
+
+**Source**
+
+
+
+"""
+
 function SIRSineWave(du, u, p, t)
   S1, S2, I1, I2, R1, R2 = u
   beta_bar, gamma_bar, beta_amp, gamma_amp, mu, m, phi, tau, T = p
