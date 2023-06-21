@@ -12,6 +12,9 @@ periods = 50, Ntotal = 10^7, initial_infected = 10)
   beta_amp = (beta_max - beta_min)/2;
   gamma_amp = (gamma_max - gamma_min)/2;
 
+  params1 = [beta_bar, gamma_bar, beta_amp, gamma_amp, 
+               mu, m,  phi, tau, cycle_length]
+
   if tau == 0
     SIR_init = [(Ntotal/2 - initial_infected),
                (Ntotal/2 - initial_infected),
@@ -29,8 +32,6 @@ periods = 50, Ntotal = 10^7, initial_infected = 10)
                 0]
     
     # Run the model forward for a cycle to account for the asynchrony
-    params1 = [beta_bar, gamma_bar, beta_amp, gamma_amp, 
-               mu, m,  phi, tau, cycle_length]
     tspan = (0.0,tau)
     sir_prob1 = ODEProblem(SIRSineWave,SIR_init,tspan,params1)
 
