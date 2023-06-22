@@ -22,6 +22,14 @@ periods = 50, Ntotal = 10^7, initial_infected = 10)
                initial_infected,
                0,
                0]
+    tspan = (0,(cycle_length*periods) )
+    sir_prob1 = ODEProblem(SIRSineWave,SIR_init,tspan,params1)
+
+    sir_sol1 = solve(sir_prob1,saveat = 0.1)
+
+
+    out = DataFrame(sir_sol1);
+
     
   else
     SIR_init = [Ntotal/2 - initial_infected, 
@@ -44,8 +52,6 @@ periods = 50, Ntotal = 10^7, initial_infected = 10)
                sir_sol1[5, end],
                0]
 
-  end
-
   # Now run entire simulation forward
   tspan = (tau,(cycle_length*periods))
 
@@ -53,17 +59,28 @@ periods = 50, Ntotal = 10^7, initial_infected = 10)
 
   sir_sol2 = solve(sir_prob2,saveat = 0.1)
 
-  return vcat(DataFrame(sir_sol1), DataFrame(sir_sol2));
+  out =  vcat(DataFrame(sir_sol1), DataFrame(sir_sol2));
 
+  end
 
+  return out;
 
 end
 
 #=
+using DifferentialEquations
+using DataFrames
+using Plots
 out = TwoPatch_Global_SIR_Sine(.57, .1, .32, .32, 0.004, 1, 0.01, 40, .87)
+out0 = TwoPatch_Global_SIR_Sine(.57, .1, .32, .32, 0.004, 0, 0.01, 40, .87)
 end_use = 1000
 begin
     plot(out.timestamp[1:end_use], out.value3[1:end_use])
-    plot!(out.timestamp[1:end_use], out.value4[1:end_use])
+    plot!(out.timestamp[1:end_use], out.value4[1:end_use],linestyle=:dash, color = "green")
+end
+
+begin
+    plot(out0.timestamp[1:end_use], out0.value3[1:end_use])
+    plot!(out0.timestamp[1:end_use], out0.value4[1:end_use], linestyle=:dash, color = "green")
 end
 =#
