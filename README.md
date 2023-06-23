@@ -15,3 +15,7 @@ To install this package you can do the following in an open Julia session
 ```julia
 ] add https://github.com/wf-id/asynchrony.git
 ```
+
+![](dev/synchron_cases.png)
+
+![](dev/synchron_growth.png)
