@@ -22,3 +22,9 @@ docs/site/
 # committed for packages, but should be committed for applications that require a static
 # environment.
 Manifest.toml
+
+dev/*.log
+dev/*.aux
+dev/*.synctex.gz
+dev/*.fls
+dev/*.fdb_latexmk

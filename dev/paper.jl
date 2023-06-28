@@ -25,18 +25,67 @@ function plot_cases(dat, main, add_y  = true)
     end
 end
 
-p_cases_async = plot_cases(out1, "Asynchrony");
+p_cases_async = plot_cases(out1, "Asynchrony", false);
 
-p_cases_sync = plot_cases(out0, "Synchrony", false);
+p_cases_sync = plot_cases(out0, "Synchrony");
 
 
-p_cases = plot(p_cases_async, p_cases_sync, layout = (1, 2))
+p_cases = plot(p_cases_sync, p_cases_async, layout = (1, 2))
 
 savefig(p_cases,"dev/synchron_cases.pdf")
 savefig(p_cases,"dev/synchron_cases.png")
-# Perfectly synched scenario
+
+# Now let's try an scenario where R < 1
+out1control = TwoPatch_Global_SIR_Sine(.57 * .8, .1, .32, .32, 0.004, 1, 0.01, 40, .87)
+out0control = TwoPatch_Global_SIR_Sine(.57 * .8 , .1, .32, .32, 0.004, 0, 0.01, 40, .87)
 
 
+function sigmoid(x)
+    1/(1+exp())
+end
+
+function plot_cases_total(dat1, dat2, add_y, main, add_labels = false)
+
+    use_row = min(nrow(dat1),nrow(dat2))
+
+    dat_plot = DataFrame(InfectionAsynch = dat1.value3[1:use_row] .+ dat1.value4[1:use_row] , 
+                         timestamp = dat1.timestamp[1:use_row] , 
+                         InfectionSynch = dat2.value3[1:use_row]  .+ dat2.value4[1:use_row] )
+
+    plot(dat_plot.timestamp[1:end_use], dat_plot.InfectionAsynch[1:end_use],linewidth = 3,
+        showaxis = :x,
+        color = col_use[1], 
+        label = if add_labels 
+            "Asychrony"
+        else 
+            false
+        end,
+        #showaxis = :x,  
+        fg_legend = :false)
+        plot!(dat_plot.timestamp[1:end_use], dat_plot.InfectionSynch[1:end_use],linestyle = :dash,
+        label =if add_labels 
+            "Sychrony"
+        else 
+            false
+        end,
+        linewidth = 3, color = col_use[7],  fg_legend = :false)
+    if add_y
+            ylabel!("Infections")
+    end
+        title!(main)
+
+
+end
+
+p_effective = plot_cases_total(out1control, out0control, false, "Effective Control")
+p_no_control = plot_cases_total(out1, out0, true, "Ineffective Control", true)
+
+p_novel = plot_cases_total(out1, out0, true, "Outbreak of Pathogen", true)
+
+savefig(p_novel,"dev/novel_pathogen_cases_nocontrol.pdf")
+
+p_control = plot(p_no_control, p_effective, layout = (1, 2))
+savefig(p_control,"dev/control_scenarios_cases.pdf")
 
 
 beta_max_set = [0.57,0.67];
@@ -184,3 +233,4 @@ plot(simz_out.Omega, simz_out.Movement, simz_out.AttackRate, st=[:surface, :cont
 xlabel!(L"\omega")
 
 contour(0:0.1:1, 0:0.001:.1, run_simulation_red)
+xlabel!(L"Synchrony \omega")
