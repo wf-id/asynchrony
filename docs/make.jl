@@ -11,9 +11,7 @@ makedocs(
     modules = [asynchrony],
     authors="Michael E. DeWitt <me.dewitt.jr@gmail.com>", "Nicholas Kortessis",
     pages = [
-        "Introduction" => "index.md",
-        "Structures" => "structs.md",
-        "Functions" => "functions.md"
+        "Introduction" => "index.md"
         ]
 )
 
