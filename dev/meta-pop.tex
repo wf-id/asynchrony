@@ -2,28 +2,28 @@
 \begin{document}
 \begin{tikzpicture}
         % Nodes for patch 1
-        \node[draw] (S1) at (0,0) {S1};
-        \node[draw] (I1) at (2,0) {I1};
-        \node[draw] (R1) at (4,0) {R1};
+        \node[draw] (SA) at (0,0) {$S_A$};
+        \node[draw] (IA) at (2,0) {$I_A$};
+        \node[draw] (RA) at (4,0) {$R_A$};
         
         % Nodes for patch 2
-        \node[draw] (S2) at (0,-2) {S2};
-        \node[draw] (I2) at (2,-2) {I2};
-        \node[draw] (R2) at (4,-2) {R2};
+        \node[draw] (SB) at (0,-2) {$S_B$};
+        \node[draw] (IB) at (2,-2) {$I_B$};
+        \node[draw] (RB) at (4,-2) {$R_B$};
         
-        \draw[->] (S1) -- node[midway,above] {$\beta_a$} (I1);
-        \draw[->] (S2) -- node[midway,above] {$\beta_b$} (I2);
+        \draw[->] (SA) -- node[midway,above] {$\beta_A(t)$} (IA);
+        \draw[->] (SB) -- node[midway,above] {$\beta_A(t)$} (IB);
 
-        \draw[->] (I1) -- node[midway,above] {$\gamma_a$} (R1);
-        \draw[->] (I2) -- node[midway,above] {$\gamma_b$} (R2);
+        \draw[->] (IA) -- node[midway,above] {$\gamma_A$} (RA);
+        \draw[->] (IB) -- node[midway,above] {$\gamma_B$} (RB);
 
         % Migration edges
-        \draw[->] (S1) -- node[midway, left] {$\textit m$} (S2);
-        \draw[->] (S2) -- (S1);
-        \draw[->] (I1) -- node[midway, left] {$\textit m$}  (I2);
-        \draw[->] (I2) -- (I1);
-        \draw[->] (R1) -- node[midway, left] {$\textit m$}  (R2);
-        \draw[->] (R2) -- (R1);
+        \draw[->] (SA) -- node[midway, left] {$\textit m$} (SB);
+        \draw[->] (SB) -- (SA);
+        \draw[->] (IA) -- node[midway, left] {$\textit m$}  (IB);
+        \draw[->] (IB) -- (IA);
+        \draw[->] (RA) -- node[midway, left] {$\textit m$}  (RB);
+        \draw[->] (RB) -- (RA);
 
 \end{tikzpicture}
 \end{document}
